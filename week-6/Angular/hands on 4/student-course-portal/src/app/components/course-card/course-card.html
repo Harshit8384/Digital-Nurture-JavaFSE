@@ -1,0 +1,38 @@
+<!-- Step 29: Use [ngClass] to apply 'card--enrolled', 'card--full' and 'expanded' conditionally -->
+<!-- Step 30: Use [ngStyle] to set left border color dynamically -->
+<div class="course-card" [ngClass]="cardClasses" [ngStyle]="borderStyle">
+  
+  <div class="card-header">
+    <span class="course-code">{{ course.code }}</span>
+    
+    <!-- Step 36: Use custom creditLabel pipe -->
+    <span class="course-credits">{{ course.credits | creditLabel }}</span>
+  </div>
+  
+  <h3 class="course-name">{{ course.name }}</h3>
+  <p class="course-id">Course ID: {{ course.id }}</p>
+
+  <!-- Step 27: Use *ngSwitch to display gradeStatus badge -->
+  <ng-container [ngSwitch]="course.gradeStatus">
+    <span class="badge badge-passed" *ngSwitchCase="'passed'">Passed</span>
+    <span class="badge badge-failed" *ngSwitchCase="'failed'">Failed</span>
+    <span class="badge badge-pending" *ngSwitchDefault>Pending</span>
+  </ng-container>
+
+  <div class="card-actions">
+    <!-- Step 21: Enroll button -->
+    <button class="enroll-card-btn" (click)="enrollRequested.emit(course.id)">
+      Enroll
+    </button>
+
+    <!-- Step 31: Show Details button to toggle isExpanded -->
+    <button class="details-btn" (click)="isExpanded = !isExpanded">
+      {{ isExpanded ? 'Hide Details' : 'Show Details' }}
+    </button>
+  </div>
+
+  <!-- Expanded content -->
+  <div class="expanded-content" *ngIf="isExpanded">
+    <p>Additional details about {{ course.name }} go here.</p>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<!-- Step 20: Render all four fields from the @Input() course object -->
+<div class="course-card">
+  <div class="card-header">
+    <span class="course-code">{{ course.code }}</span>
+    <span class="course-credits">{{ course.credits }} Credits</span>
+  </div>
+  <h3 class="course-name">{{ course.name }}</h3>
+  <p class="course-id">Course ID: {{ course.id }}</p>
+
+  <!-- Step 21: Enroll button emits the course ID via @Output EventEmitter -->
+  <button class="enroll-card-btn" (click)="enrollRequested.emit(course.id)">
+    Enroll
+  </button>
+</div>

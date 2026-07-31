@@ -1,0 +1,35 @@
+<div class="course-list-container">
+  <h1>Available Courses</h1>
+  <p class="subtitle">Browse and enroll in our course catalog</p>
+
+  <!-- Step 25: Loading indicator -->
+  <p *ngIf="isLoading">Loading courses...</p>
+
+  <!-- Container for courses -->
+  <ng-container *ngIf="!isLoading">
+    
+    <!-- Step 28: *ngIf with else block for empty list -->
+    <div *ngIf="courses.length > 0; else noCourses" class="course-grid">
+      
+      <!-- Step 26: *ngFor with index and trackBy -->
+      <!-- Step 34: Use appHighlight custom directive (configured in Step 37) -->
+      <app-course-card
+        *ngFor="let c of courses; let i = index; trackBy: trackByCourseId"
+        [course]="c"
+        [isEnrolled]="selectedCourseId === c.id"
+        appHighlight="lightblue"
+        (enrollRequested)="onEnroll($event)">
+      </app-course-card>
+
+    </div>
+
+    <!-- Step 28: else template -->
+    <ng-template #noCourses>
+      <p>No courses available.</p>
+    </ng-template>
+
+    <p class="selected-course" *ngIf="selectedCourseId">
+      Selected course ID: {{ selectedCourseId }}
+    </p>
+  </ng-container>
+</div>

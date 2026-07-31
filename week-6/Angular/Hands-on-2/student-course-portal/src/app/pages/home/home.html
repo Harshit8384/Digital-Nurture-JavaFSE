@@ -1,0 +1,49 @@
+<div class="home-container">
+
+  <!-- Step 11: String Interpolation — component property displayed in the template -->
+  <h1>{{ portalName }}</h1>
+
+  <p class="description">
+    Your one-stop platform for managing courses, tracking enrollment, and monitoring academic progress.
+  </p>
+
+  <!-- Stats row showing available courses (loaded via ngOnInit) -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <span class="stat-value">{{ availableCourses }}</span>
+      <span class="stat-label">Courses Available</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value">3</span>
+      <span class="stat-label">Enrolled</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value">3.8</span>
+      <span class="stat-label">GPA</span>
+    </div>
+  </div>
+
+  <!-- Step 12: Property Binding — [disabled] binds to component property (one-way: component → DOM) -->
+  <div class="action-section">
+    <button class="enroll-btn" [disabled]="!isPortalActive" (click)="onEnrollClick()">
+      Enroll Now
+    </button>
+
+    <!-- Step 13: Event Binding — (click) triggers onEnrollClick() which sets the message -->
+    <p class="message" *ngIf="message">{{ message }}</p>
+  </div>
+
+  <!-- Step 14: Two-Way Binding — [(ngModel)] keeps searchTerm in sync between DOM ↔ component -->
+  <div class="search-section">
+    <label for="searchInput">Search Courses:</label>
+    <input
+      id="searchInput"
+      type="text"
+      [(ngModel)]="searchTerm"
+      placeholder="Type to search courses..."
+      class="search-input"
+    />
+    <p class="search-result">Searching for: {{ searchTerm }}</p>
+  </div>
+
+</div>

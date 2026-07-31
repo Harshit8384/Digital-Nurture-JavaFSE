@@ -1,0 +1,3 @@
+Welcome to Git!
+This is a multiline comment added using our default editor.
+Learning Git helps us track changes effectively.
