@@ -1,0 +1,63 @@
+.course-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.course-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.course-code {
+  background-color: #e8eaf6;
+  color: #1a237e;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.course-credits {
+  color: #666;
+  font-size: 0.85rem;
+}
+
+.course-name {
+  color: #1a237e;
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.course-id {
+  color: #888;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.enroll-card-btn {
+  background-color: #1a237e;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.5rem;
+  font-size: 0.95rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  align-self: flex-start;
+}
+
+.enroll-card-btn:hover {
+  background-color: #283593;
+}

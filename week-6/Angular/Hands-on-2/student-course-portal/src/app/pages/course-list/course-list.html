@@ -1,0 +1,20 @@
+<div class="course-list-container">
+  <h1>Available Courses</h1>
+  <p class="subtitle">Browse and enroll in our course catalog</p>
+
+  <!-- Step 22: Render a CourseCardComponent for each course using *ngFor -->
+  <!-- Step 22: [course] passes data DOWN via @Input (parent → child) -->
+  <!-- Step 22: (enrollRequested) listens for events UP via @Output (child → parent) -->
+  <div class="course-grid">
+    <app-course-card
+      *ngFor="let c of courses"
+      [course]="c"
+      (enrollRequested)="onEnroll($event)">
+    </app-course-card>
+  </div>
+
+  <!-- Step 24: Display the selected course ID using *ngIf -->
+  <p class="selected-course" *ngIf="selectedCourseId">
+    Selected course ID: {{ selectedCourseId }}
+  </p>
+</div>

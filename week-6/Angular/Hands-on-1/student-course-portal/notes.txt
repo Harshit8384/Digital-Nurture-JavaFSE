@@ -1,0 +1,24 @@
+===== TASK 1: File Purpose Explanations =====
+
+1. angular.json       — Workspace configuration file that defines project structure, build/serve/test architect targets, budgets, and asset/style configurations.
+2. tsconfig.json      — Root TypeScript configuration that sets compiler options (strict mode, module resolution, target ES) shared across the entire workspace.
+3. tsconfig.app.json  — Extends tsconfig.json with app-specific settings; specifies which files to include/exclude for the application build.
+4. package.json       — Node.js manifest listing project dependencies (@angular/core, etc.), devDependencies, and npm scripts (start, build, test).
+5. src/main.ts        — Application entry point that bootstraps the root App component with the appConfig (providers, routing) using the standalone API.
+6. src/app/app.config.ts — Application-level configuration (standalone mode) that registers providers such as the Router, replacing the traditional AppModule.
+7. src/app/app.ts     — Root component (AppComponent) decorated with @Component; defines the selector 'app-root', template, styles, and imports RouterOutlet.
+8. src/index.html     — The single HTML page served to the browser; contains <app-root> where Angular renders the application.
+
+===== TASK 1 (Step 5): Budget Configuration in angular.json =====
+
+Location: architect > build > configurations > production > budgets
+
+Budget 1 - Initial Bundle:
+  - maximumWarning: 500kB — Angular will emit a WARNING during build if the initial JS bundle exceeds 500 kilobytes.
+  - maximumError: 1MB    — Angular will FAIL the build with an ERROR if the initial JS bundle exceeds 1 megabyte.
+  
+Budget 2 - Component Styles:
+  - maximumWarning: 4kB  — Warning if any single component's CSS exceeds 4 kilobytes.
+  - maximumError: 8kB    — Error if any single component's CSS exceeds 8 kilobytes.
+
+Purpose: Budgets prevent the application from growing too large unnoticed, ensuring optimal load performance.
