@@ -1,0 +1,42 @@
+<div class="home-container">
+  <!-- Hands-On 2 Task 1: String interpolation -->
+  <h1>Welcome to {{ portalName }}</h1>
+
+  <p class="description">
+    Your centralized portal for browsing academic course offerings, tracking enrollment status, viewing grade reports, and managing your student profile.
+  </p>
+
+  <!-- Hands-On 1 Task 2: Stats row -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <span class="stat-value">{{ availableCoursesCount }}</span>
+      <span class="stat-label">Courses Available</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value">3</span>
+      <span class="stat-label">Enrolled</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value">3.8</span>
+      <span class="stat-label">GPA</span>
+    </div>
+  </div>
+
+  <!-- Hands-On 2 Task 1: Property Binding and Event Binding -->
+  <div class="action-section">
+    <button type="button" class="btn btn-primary" [disabled]="!isPortalActive" (click)="onEnrollClick()">
+      Enroll Now
+    </button>
+    <p *ngIf="message" class="message-alert">{{ message }}</p>
+  </div>
+
+  <!-- Hands-On 2 Task 1: Two-Way Binding with ngModel -->
+  <div class="search-section">
+    <label for="search-input">Search Portal:</label>
+    <input id="search-input" type="text" [(ngModel)]="searchTerm" placeholder="Type search term..." class="form-control" />
+    <p class="search-preview">Searching for: {{ searchTerm }}</p>
+  </div>
+
+  <!-- Component-level notification demo -->
+  <app-notification></app-notification>
+</div>

@@ -1,0 +1,97 @@
+<div class="form-container">
+  <h2>Reactive Enrollment Form</h2>
+
+  <div *ngIf="isSubmitted" class="alert alert-success">
+    Reactive Enrollment Request successfully submitted!
+  </div>
+
+  <form [formGroup]="enrollForm" (ngSubmit)="onSubmit()" novalidate>
+    <!-- studentName control -->
+    <div class="form-group">
+      <label for="studentName">Student Name *</label>
+      <input
+        type="text"
+        id="studentName"
+        formControlName="studentName"
+        class="form-control"
+      />
+      <div *ngIf="enrollForm.get('studentName')?.touched && enrollForm.get('studentName')?.errors" class="error-msg">
+        <span *ngIf="enrollForm.get('studentName')?.errors?.['required']">Name is required</span>
+        <span *ngIf="enrollForm.get('studentName')?.errors?.['minlength']">Name must be at least 3 characters</span>
+      </div>
+    </div>
+
+    <!-- studentEmail control with async validator state -->
+    <div class="form-group">
+      <label for="studentEmail">Student Email *</label>
+      <input
+        type="email"
+        id="studentEmail"
+        formControlName="studentEmail"
+        class="form-control"
+      />
+      <div *ngIf="enrollForm.get('studentEmail')?.pending" class="pending-msg">
+        Checking email availability...
+      </div>
+      <div *ngIf="enrollForm.get('studentEmail')?.touched && enrollForm.get('studentEmail')?.errors" class="error-msg">
+        <span *ngIf="enrollForm.get('studentEmail')?.errors?.['required']">Email is required</span>
+        <span *ngIf="enrollForm.get('studentEmail')?.errors?.['email']">Invalid email format</span>
+        <!-- Hands-On 5 Task 2 Step 55: Async validator error -->
+        <span *ngIf="enrollForm.get('studentEmail')?.errors?.['emailTaken']">Email taken</span>
+      </div>
+    </div>
+
+    <!-- courseId control with custom synchronous validator -->
+    <div class="form-group">
+      <label for="courseId">Course Code / ID *</label>
+      <input
+        type="text"
+        id="courseId"
+        formControlName="courseId"
+        class="form-control"
+      />
+      <div *ngIf="enrollForm.get('courseId')?.touched && enrollForm.get('courseId')?.errors" class="error-msg">
+        <span *ngIf="enrollForm.get('courseId')?.errors?.['required']">Course ID is required</span>
+        <!-- Hands-On 5 Task 2 Step 54: Custom error message display -->
+        <span *ngIf="enrollForm.get('courseId')?.errors?.['noCourseCode']">Course code starting with XX is not allowed.</span>
+      </div>
+    </div>
+
+    <!-- preferredSemester control -->
+    <div class="form-group">
+      <label for="preferredSemester">Preferred Semester</label>
+      <select id="preferredSemester" formControlName="preferredSemester" class="form-control">
+        <option value="Odd">Odd Semester</option>
+        <option value="Even">Even Semester</option>
+      </select>
+    </div>
+
+    <!-- FormArray for additionalCourses -->
+    <div class="form-group dynamic-section">
+      <label>Additional Courses (FormArray):</label>
+      <div formArrayName="additionalCourses">
+        <div *ngFor="let ctrl of additionalCourses.controls; let i = index" class="array-item">
+          <input [formControl]="$any(ctrl)" placeholder="Additional course code..." class="form-control" />
+          <button type="button" class="btn btn-remove" (click)="removeCourse(i)">Remove</button>
+        </div>
+      </div>
+      <button type="button" class="btn btn-add" (click)="addCourse()">+ Add Another Course</button>
+    </div>
+
+    <!-- agreeToTerms control -->
+    <div class="form-group checkbox-group">
+      <label>
+        <input type="checkbox" formControlName="agreeToTerms" />
+        I accept terms and conditions *
+      </label>
+      <div *ngIf="enrollForm.get('agreeToTerms')?.touched && enrollForm.get('agreeToTerms')?.errors" class="error-msg">
+        <span>Must agree to terms to proceed</span>
+      </div>
+    </div>
+
+    <!-- Submit button -->
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary" [disabled]="enrollForm.invalid">Submit</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,52 @@
+<div class="course-list-page">
+  <h2>Available Courses</h2>
+
+  <!-- Hands-On 6 Shared Service Widget -->
+  <app-course-summary-widget></app-course-summary-widget>
+
+  <!-- Query Parameter Search Input -->
+  <div class="filter-bar">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      (ngModelChange)="onSearchChange()"
+      placeholder="Filter courses by name or code..."
+      class="search-input"
+    />
+  </div>
+
+  <!-- Hands-On 8 Task 2: Error handling template block -->
+  <div *ngIf="errorMessage" class="error-banner">
+    <p>{{ errorMessage }}</p>
+  </div>
+
+  <!-- Hands-On 3 Task 1 Step 25: Loading indicator with *ngIf -->
+  <div *ngIf="isLoading; else courseGrid" class="loading-state">
+    <p>Loading courses...</p>
+  </div>
+
+  <ng-template #courseGrid>
+    <!-- Hands-On 3 Task 1 Step 28: Empty array template with *ngIf else -->
+    <div *ngIf="courses && courses.length > 0; else noCourses" class="grid-container">
+      <!-- Hands-On 3 Task 1 Step 26: *ngFor with trackBy -->
+      <div *ngFor="let c of courses; let i = index; trackBy: trackByCourseId" (click)="onCardClick(c.id)" class="clickable-card-wrapper">
+        <app-course-card
+          [course]="c"
+          [appHighlight]="'#fef08a'"
+          (enrollRequested)="onEnroll($event)"
+        ></app-course-card>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #noCourses>
+    <div class="empty-state">
+      <p>No courses available.</p>
+    </div>
+  </ng-template>
+
+  <!-- Hands-On 2 Task 3 Step 24: Selected course ID display -->
+  <div *ngIf="selectedCourseId" class="selected-info">
+    <p>Selected course ID: {{ selectedCourseId }}</p>
+  </div>
+</div>
