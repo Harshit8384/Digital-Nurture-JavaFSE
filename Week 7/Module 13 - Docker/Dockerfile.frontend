@@ -1,0 +1,15 @@
+# Multi-stage build for the Angular student-course-portal app
+
+# --- Stage 1: build ---
+FROM node:20-alpine AS build
+WORKDIR /app
+COPY "Module 09 - Angular/student-course-portal/package*.json" ./
+RUN npm ci
+COPY "Module 09 - Angular/student-course-portal/" ./
+RUN npx ng build --configuration production
+
+# --- Stage 2: serve with nginx ---
+FROM nginx:alpine
+COPY --from=build /app/dist/student-course-portal/browser /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
